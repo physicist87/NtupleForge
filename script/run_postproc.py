@@ -115,6 +115,12 @@ def main():
                         help="Max number of events to process. Default is None (Run All).")
     parser.add_argument("--first-entry", type=int, default=0,
                         help="Index of the first event to process. Default is 0.")
+    parser.add_argument(
+        "--json-input", type=str, default=None,
+        help="JSON run/lumi selection for PostProcessor. In CRAB Data jobs this "
+             "is generated automatically from the lumis assigned after the "
+             "official Golden JSON lumiMask is applied."
+    )
 
     # [3] ttbarCategorizer Options
     # ────────────────────────────────────────────────────────────────────
@@ -288,6 +294,7 @@ def main():
             justcount=False, # If True, only count events and exit. At the same time, the fwkJobReport variable must be set to False.
             maxEntries=args.max_events,
             firstEntry=args.first_entry,
+            jsonInput=args.json_input,
             haddFileName=args.output_file, # Triggers merge if not None
             provenance=True, # Save provenance metadata in the output file
             fwkJobReport=True, # Set "True" for CRAB job

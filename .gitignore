@@ -10,3 +10,16 @@ FrameworkJobReport.xml
 *.swp
 crab.log
 campaign_*
+
+# HTCondor local/generated files
+condor/CMSSW_*_full.tar.gz
+condor/condor_logs/
+condor/condor_logs_bk/
+condor/input_lists/
+condor/job_list.txt
+condor/condor.jdl
+condor/condor.jdl.bk
+
+# Local/specialized Condor production scripts
+condor/submit_all_dtg.sh
+condor/submit_ttbar_dilep.sh

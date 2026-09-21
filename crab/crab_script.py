@@ -12,6 +12,8 @@ import sys
 import subprocess
 import logging
 import importlib.util
+import json
+from PhysicsTools.NanoAODTools.postprocessing.utils.crabhelper import runsAndLumis
 
 # Setup Logging
 logging.basicConfig(level=logging.INFO, format='[crab_script] : %(message)s')
@@ -128,9 +130,30 @@ def main():
         logger.warning(f"{args_file} not found. Running with defaults.")
 
     # ------------------------------------------------------------------
-    # 5. Execution
+    # 5. CRAB run/lumi selection
     # ------------------------------------------------------------------
-    # Construct command: python3 run_postproc.py [inputs] [flags]
+    # For Data, CRAB first applies config.Data.lumiMask and assigns the
+    # certified run/lumi subset to this job. Forward that exact subset
+    # to NanoAODTools PostProcessor via --json-input.
+    try:
+        crab_lumis = runsAndLumis()
+    except Exception as e:
+        logger.warning(f"Could not read CRAB run/lumi assignment: {e}")
+        crab_lumis = {}
+
+    if crab_lumis:
+        lumi_json = "crab_lumis.json"
+        with open(lumi_json, "w") as f:
+            json.dump(crab_lumis, f, sort_keys=True)
+        extra_flags.extend(["--json-input", lumi_json])
+        logger.info(f"CRAB run/lumi selection written to {lumi_json}")
+        logger.info(f"Run/lumi entries: {len(crab_lumis)} run(s)")
+    else:
+        logger.info("No CRAB run/lumi selection found (expected for MC).")
+
+    # ------------------------------------------------------------------
+    # 6. Execution
+    # ------------------------------------------------------------------
     cmd = [sys.executable, main_script] + input_files + extra_flags
     
     logger.info("-" * 60)
@@ -141,9 +164,9 @@ def main():
         # Flush buffers to ensure logs appear in order
         sys.stdout.flush()
         subprocess.run(cmd, check=True)
-        logger.info("✅ Post-processing completed successfully.")
+        logger.info("Post-processing completed successfully.")
     except subprocess.CalledProcessError as e:
-        logger.error(f"❌ Execution failed with exit code {e.returncode}")
+        logger.error(f"Execution failed with exit code {e.returncode}")
         sys.exit(e.returncode)
 
 if __name__ == "__main__":

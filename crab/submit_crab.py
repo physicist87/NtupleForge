@@ -36,6 +36,14 @@ except ImportError:
 logging.basicConfig(level=logging.INFO, format='[submit_crab] : %(message)s')
 logger = logging.getLogger("Submitter")
 
+# Official CMS Run-2 Golden JSONs used for Data lumi certification.
+# Modified by Seungkyu Ha (seungkyu.ha@cern.ch)
+LUMI_MASK_URLS = {
+    "2016": "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt",
+    "2017": "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions17/13TeV/Legacy_2017/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt",
+    "2018": "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt",
+}
+
 # --- Job-state buckets for --report -----------------------------------------
 # CRAB job states shown as their own column in the compact report.
 REPORT_COLUMNS = ["finished", "running", "idle", "transferring", "failed"]
@@ -277,6 +285,33 @@ def main(args):
     
     conf.Data.unitsPerJob = user_units
     conf.Data.publication = False
+
+    # ------------------------------------------------------
+    # Golden JSON / lumi mask (Data only)
+    # ------------------------------------------------------
+    sample_type = str(common.get('sample_type', '')).strip().lower()
+    is_data = (sample_type == 'data')
+
+    if is_data:
+        year = str(common.get('year', '')).strip()
+        if year not in LUMI_MASK_URLS:
+            logger.error(
+                "Data configuration requires common.year = 2016, 2017, or 2018 "
+                f"(got: {common.get('year')!r})"
+            )
+            sys.exit(1)
+
+        if splitting_mode != 'LumiBased':
+            logger.error(
+                f"Data production must use splitting: LumiBased (got: {splitting_mode})"
+            )
+            sys.exit(1)
+
+        conf.Data.lumiMask = LUMI_MASK_URLS[year]
+        logger.info(f"Data sample: applying {year} CMS Golden JSON")
+        logger.info(f"Lumi mask: {conf.Data.lumiMask}")
+    else:
+        logger.info("MC sample: no Golden JSON / lumi mask applied")
 
     username = getUsername()
     base_out = common.get('output_base', '')
