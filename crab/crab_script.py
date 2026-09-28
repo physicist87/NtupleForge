@@ -107,8 +107,24 @@ def main():
     # ------------------------------------------------------------------
     # 4. Inject User Arguments
     # ------------------------------------------------------------------
-    # We look for 'crab_args.txt' which contains flags like -b, -I, etc.
-    args_file = "crab_args.txt"
+    # Find the config/job-specific argument file shipped by submit_crab.py.
+    # A unique filename avoids collisions when Data and MC submissions are
+    # launched concurrently from the same submit directory.
+    import glob
+
+    args_candidates = sorted(glob.glob("crab_args_*.txt"))
+
+    if len(args_candidates) == 0:
+        logger.error("CRITICAL: No crab_args_*.txt file found in worker sandbox")
+        sys.exit(1)
+
+    if len(args_candidates) > 1:
+        logger.error(
+            f"CRITICAL: Multiple CRAB argument files found: {args_candidates}"
+        )
+        sys.exit(1)
+
+    args_file = args_candidates[0]
     extra_flags = []
 
     if os.path.exists(args_file):

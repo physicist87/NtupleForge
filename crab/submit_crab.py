@@ -275,7 +275,12 @@ def main(args):
 
 
     # -- Arguments File Generation --
-    args_file = "crab_args.txt"
+    # Use a config/job-specific filename to avoid race conditions when
+    # multiple submit_crab.py processes run concurrently in the same
+    # working directory (e.g. Data and MC submissions in parallel).
+    safe_job_id = str(common.get('jobID', 'task')).replace('/', '_')
+    args_file = f"crab_args_{safe_job_id}.txt"
+
     with open(args_file, "w") as f:
         # Branch Arg
         if branch_sel: 
