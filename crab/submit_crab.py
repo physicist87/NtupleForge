@@ -24,6 +24,8 @@ import logging
 import subprocess
 import io
 import contextlib
+import json
+import urllib.request
 from CRABClient.UserUtilities import config, getUsername
 from CRABAPI.RawCommand import crabCommand
 
@@ -222,6 +224,48 @@ def main(args):
     # Add YAML Config (Provenance)
     conf.JobType.inputFiles.append(args.config)
 
+    # ------------------------------------------------------
+    # Golden JSON Handling (Data only)
+    # ------------------------------------------------------
+    # The Golden JSON URL is specified in the YAML configuration.
+    # Download it on the submit host and ship the local copy in the
+    # CRAB sandbox. The worker passes it to NanoAODTools via -J.
+    golden_json_file = None
+    sample_type = str(common.get('sample_type', '')).strip().lower()
+    golden_json_url = common.get('golden_json')
+
+    if sample_type == 'data':
+        if not golden_json_url:
+            logger.error("CRITICAL: Data configuration requires 'golden_json'")
+            sys.exit(1)
+
+        golden_json_file = os.path.basename(golden_json_url)
+
+        try:
+            logger.info(f"Downloading Golden JSON: {golden_json_url}")
+            urllib.request.urlretrieve(golden_json_url, golden_json_file)
+
+            # Validate that the downloaded file is valid JSON.
+            with open(golden_json_file, 'r') as jf:
+                golden_data = json.load(jf)
+
+            if not isinstance(golden_data, dict) or not golden_data:
+                raise ValueError("Golden JSON must contain a non-empty JSON object")
+
+            conf.JobType.inputFiles.append(golden_json_file)
+            logger.info(f"Adding Golden JSON to CRAB sandbox: {golden_json_file}")
+
+        except Exception as e:
+            if golden_json_file and os.path.exists(golden_json_file):
+                os.remove(golden_json_file)
+            logger.error(f"CRITICAL: Failed to prepare Golden JSON: {e}")
+            sys.exit(1)
+
+    elif golden_json_url:
+        logger.warning(
+            "golden_json is defined for a non-Data configuration; ignoring it"
+        )
+
 
     # ------------------------------------------------------
     # Output Filename Logic
@@ -241,6 +285,10 @@ def main(args):
         if worker_module_arg: 
             f.write(f"-I\n{worker_module_arg}\n")
             
+        # Golden JSON Arg (Data only)
+        if golden_json_file:
+            f.write(f"-J\n{os.path.basename(golden_json_file)}\n")
+
         if common.get('max_events'): 
             f.write(f"-N\n{common.get('max_events')}\n")
 
@@ -394,9 +442,12 @@ def main(args):
         logger.info("        crab resubmit -d <workArea>/crab_<reqName> --maxmemory=4000 --maxjobruntime=2700")
         logger.info("      See docs/troubleshooting.md (CRAB resubmit) for exit codes and details.")
 
-    # Cleanup temp file
+    # Cleanup temporary submission files
     if os.path.exists(args_file):
         os.remove(args_file)
+
+    if golden_json_file and os.path.exists(golden_json_file):
+        os.remove(golden_json_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="YAML based CRAB Manager")

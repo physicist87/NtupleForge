@@ -1,0 +1,66 @@
+# ================================================================================
+# CPV (top CP-violation) analysis — 2016postVFPUL, NanoAODv15 — DATA ONLY
+#
+# Modified by Seungkyu Ha (seungkyu.ha@cern.ch)
+#
+# This configuration is the NanoAODv15 update of the Run-2 UL CPV production
+# configuration. Dataset paths are taken from the user-provided Run2 NanoAODv15
+# sample list and filtered for the corresponding data-taking era.
+#
+# DATA / MC wiring
+# ----------------
+# Data -> modules/noop.py
+#         + branches/branch_CPV_Run2_Data.txt
+# MC   -> modules/topCPVCategorizer.py
+#         + branches/branch_CPV_Run2_MC.txt
+# The generator-level top CPV categorizer is MC-only and must not be run on Data.
+#
+# DATASET SELECTION
+# -----------------
+# - NanoAODv15 only.
+# - QCD samples are excluded from MC.
+# - TTJets samples are excluded from MC; TTTo2L2Nu / TTToSemiLeptonic /
+#   TTToHadronic samples are retained.
+# - 2016 postVFP MC uses the non-APV campaign.
+# - 2016 postVFP Data uses the non-HIPM datasets.
+# - SinglePhoton is excluded from 2016/2017 Data.
+#
+# STATUS
+# ------
+# FINAL : analysis_module / branch_file tier wiring.
+# FINAL : dataset selection according to the rules above.
+# NOTE  : dataset paths originate from the provided sample list; this header does
+#         not claim an independent full DAS validation of every NanoAODv15 path.
+# FINAL : Data and MC use FileBased / 1 file per job.
+# Analyst-controlled production tags: jobID / output_base.
+# ================================================================================
+
+common:
+  year: "2016"
+  sample_type: "Data"
+  jobID: "CPV2016postVFP_v15_Data"
+  site: "T3_KR_KNU"
+  output_base: "CPV_ntuple/NanoAODv15/2016PostVFP/Data"
+  analysis_module: ["modules/noop.py", "MODULES"]
+  branch_file: "branches/branch_CPV_Run2_Data.txt"
+  splitting: "FileBased"
+  units_per_job: 1
+  golden_json: "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt"
+
+datasets:
+  # --- Data (NANOAOD) ---
+  SingleElectron_Run2016F: "/SingleElectron/Run2016F-UL2016_NanoAODv15-v1/NANOAOD"
+  SingleElectron_Run2016G: "/SingleElectron/Run2016G-UL2016_NanoAODv15-v1/NANOAOD"
+  SingleElectron_Run2016H: "/SingleElectron/Run2016H-UL2016_NanoAODv15-v1/NANOAOD"
+  SingleMuon_Run2016F: "/SingleMuon/Run2016F-UL2016_NanoAODv15-v1/NANOAOD"
+  SingleMuon_Run2016G: "/SingleMuon/Run2016G-UL2016_NanoAODv15-v1/NANOAOD"
+  SingleMuon_Run2016H: "/SingleMuon/Run2016H-UL2016_NanoAODv15-v1/NANOAOD"
+  DoubleMuon_Run2016F: "/DoubleMuon/Run2016F-UL2016_NanoAODv15-v1/NANOAOD"
+  DoubleMuon_Run2016G: "/DoubleMuon/Run2016G-UL2016_NanoAODv15-v1/NANOAOD"
+  DoubleMuon_Run2016H: "/DoubleMuon/Run2016H-UL2016_NanoAODv15-v1/NANOAOD"
+  DoubleEG_Run2016F: "/DoubleEG/Run2016F-UL2016_NanoAODv15-v1/NANOAOD"
+  DoubleEG_Run2016G: "/DoubleEG/Run2016G-UL2016_NanoAODv15-v1/NANOAOD"
+  DoubleEG_Run2016H: "/DoubleEG/Run2016H-UL2016_NanoAODv15-v1/NANOAOD"
+  MuonEG_Run2016F: "/MuonEG/Run2016F-UL2016_NanoAODv15-v1/NANOAOD"
+  MuonEG_Run2016G: "/MuonEG/Run2016G-UL2016_NanoAODv15-v1/NANOAOD"
+  MuonEG_Run2016H: "/MuonEG/Run2016H-UL2016_NanoAODv15-v1/NANOAOD"

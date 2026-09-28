@@ -1,0 +1,49 @@
+# Top CPV Run3 2024 MC - NanoAOD v15
+#
+# MC does not use Golden JSON.
+#
+# Data and MC use FileBased / 1 file per job.
+
+common:
+  year: "2024"
+  sample_type: "MC"
+  jobID: "CPV2024_v15_MC"
+  site: "T3_KR_KNU"
+  output_base: "CPV_ntuple/NanoAODv15/2024/MC"
+  analysis_module: ["modules/topCPVCategorizer.py", "MODULES"]
+  branch_file: "branches/branch_CPV_Run3_MC.txt"
+  splitting: "FileBased"
+  units_per_job: 1
+
+datasets:
+  TTto2L2Nu_TuneCP5_13p6TeV_powheg_pythia8: "/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v3/NANOAODSIM"
+  TTtoLNu2Q_TuneCP5_13p6TeV_powheg_pythia8: "/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TTto4Q_TuneCP5_13p6TeV_powheg_pythia8: "/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg_pythia8: "/TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarWplusto4Q_TuneCP5_13p6TeV_powheg_pythia8: "/TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg_pythia8: "/TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TWminusto2L2Nu_TuneCP5_13p6TeV_powheg_pythia8: "/TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TWminusto4Q_TuneCP5_13p6TeV_powheg_pythia8: "/TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TWminustoLNu2Q_TuneCP5_13p6TeV_powheg_pythia8: "/TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarBtoLNu_s_channel_TuneCP5_13p6TeV_powheg_pythia8: "/TbarBtoLNu-s-channel_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarBto2Q_s_channel_TuneCP5_13p6TeV_powheg_pythia8: "/TbarBto2Q-s-channel_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TBbartoLNu_s_channel_TuneCP5_13p6TeV_powheg_pythia8: "/TBbartoLNu-s-channel_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TBbarto2Q_s_channel_TuneCP5_13p6TeV_powheg_pythia8: "/TBbarto2Q-s-channel_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarBQto2Q_t_channel_4FS_TuneCP5_13p6TeV_powheg_madspin_pythia8: "/TbarBQto2Q-t-channel-4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TbarBQtoLNu_t_channel_4FS_TuneCP5_13p6TeV_powheg_madspin_pythia8: "/TbarBQtoLNu-t-channel-4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TBbarQto2Q_t_channel_4FS_TuneCP5_13p6TeV_powheg_madspin_pythia8: "/TBbarQto2Q-t-channel-4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  TBbarQtoLNu_t_channel_4FS_TuneCP5_13p6TeV_powheg_madspin_pythia8: "/TBbarQtoLNu-t-channel-4FS_TuneCP5_13p6TeV_powheg-madspin-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  DYto2E_Bin_MLL_10to50_TuneCP5_13p6TeV_powheg_pythia8: "/DYto2E_Bin-MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  DYto2E_2Jets_Bin_MLL_50_TuneCP5_13p6TeV_amcatnloFXFX_pythia8: "/DYto2E-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v4/NANOAODSIM"
+  DYto2Mu_Bin_MLL_10to50_TuneCP5_13p6TeV_powheg_pythia8: "/DYto2Mu_Bin-MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  DYto2Mu_2Jets_Bin_MLL_50_TuneCP5_13p6TeV_amcatnloFXFX_pythia8: "/DYto2Mu-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v6/NANOAODSIM"
+  DYto2Tau_Bin_MLL_10to50_TuneCP5_13p6TeV_powheg_pythia8: "/DYto2Tau_Bin-MLL-10to50_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  DYto2Tau_2Jets_Bin_MLL_50_TuneCP5_13p6TeV_amcatnloFXFX_pythia8: "/DYto2Tau-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v7/NANOAODSIM"
+  ZZto2L2Nu_TuneCP5_13p6TeV_powheg_pythia8: "/ZZto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  ZZto2L2Q_TuneCP5_13p6TeV_powheg_pythia8: "/ZZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  ZZto4L_TuneCP5_13p6TeV_powheg_pythia8: "/ZZto4L_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  WWto2L2Nu_TuneCP5_13p6TeV_powheg_pythia8: "/WWto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  WWtoLNu2Q_TuneCP5_13p6TeV_powheg_pythia8: "/WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  WZto2L2Q_TuneCP5_13p6TeV_powheg_pythia8: "/WZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  WZto3LNu_TuneCP5_13p6TeV_powheg_pythia8: "/WZto3LNu_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"
+  WZtoLNu2Q_TuneCP5_13p6TeV_powheg_pythia8: "/WZtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/RunIII2024Summer24NanoAODv15-150X_mcRun3_2024_realistic_v2-v2/NANOAODSIM"

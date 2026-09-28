@@ -1,0 +1,65 @@
+# ================================================================================
+# CPV (top CP-violation) analysis — 2018UL, NanoAODv15 — DATA ONLY
+#
+# Modified by Seungkyu Ha (seungkyu.ha@cern.ch)
+#
+# This configuration is the NanoAODv15 update of the Run-2 UL CPV production
+# configuration. Dataset paths are taken from the user-provided Run2 NanoAODv15
+# sample list and filtered for the corresponding data-taking era.
+#
+# DATA / MC wiring
+# ----------------
+# Data -> modules/noop.py
+#         + branches/branch_CPV_Run2_Data.txt
+# MC   -> modules/topCPVCategorizer.py
+#         + branches/branch_CPV_Run2_MC.txt
+# The generator-level top CPV categorizer is MC-only and must not be run on Data.
+#
+# DATASET SELECTION
+# -----------------
+# - NanoAODv15 only.
+# - QCD samples are excluded from MC.
+# - TTJets samples are excluded from MC; TTTo2L2Nu / TTToSemiLeptonic /
+#   TTToHadronic samples are retained.
+# - All NanoAODv15 Data streams listed for 2018 are retained.
+#
+# STATUS
+# ------
+# FINAL : analysis_module / branch_file tier wiring.
+# FINAL : dataset selection according to the rules above.
+# NOTE  : dataset paths originate from the provided sample list; this header does
+#         not claim an independent full DAS validation of every NanoAODv15 path.
+# FINAL : Data and MC use FileBased / 1 file per job.
+# Analyst-controlled production tags: jobID / output_base.
+# ================================================================================
+
+common:
+  year: "2018"
+  sample_type: "Data"
+  jobID: "CPV2018_v15_Data"
+  site: "T3_KR_KNU"
+  output_base: "CPV_ntuple/NanoAODv15/2018/Data"
+  analysis_module: ["modules/noop.py", "MODULES"]
+  branch_file: "branches/branch_CPV_Run2_Data.txt"
+  splitting: "FileBased"
+  units_per_job: 1
+  golden_json: "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt"
+
+datasets:
+  # --- Data (NANOAOD) ---
+  SingleMuon_Run2018A: "/SingleMuon/Run2018A-UL2018_NanoAODv15-v2/NANOAOD"
+  SingleMuon_Run2018B: "/SingleMuon/Run2018B-UL2018_NanoAODv15-v2/NANOAOD"
+  SingleMuon_Run2018C: "/SingleMuon/Run2018C-UL2018_NanoAODv15-v2/NANOAOD"
+  SingleMuon_Run2018D: "/SingleMuon/Run2018D-UL2018_NanoAODv15-v2/NANOAOD"
+  DoubleMuon_Run2018A: "/DoubleMuon/Run2018A-UL2018_NanoAODv15-v2/NANOAOD"
+  DoubleMuon_Run2018B: "/DoubleMuon/Run2018B-UL2018_NanoAODv15-v2/NANOAOD"
+  DoubleMuon_Run2018C: "/DoubleMuon/Run2018C-UL2018_NanoAODv15-v2/NANOAOD"
+  DoubleMuon_Run2018D: "/DoubleMuon/Run2018D-UL2018_NanoAODv15-v2/NANOAOD"
+  EGamma_Run2018A: "/EGamma/Run2018A-UL2018_NanoAODv15-v2/NANOAOD"
+  EGamma_Run2018B: "/EGamma/Run2018B-UL2018_NanoAODv15-v2/NANOAOD"
+  EGamma_Run2018C: "/EGamma/Run2018C-UL2018_NanoAODv15-v2/NANOAOD"
+  EGamma_Run2018D: "/EGamma/Run2018D-UL2018_NanoAODv15-v2/NANOAOD"
+  MuonEG_Run2018A: "/MuonEG/Run2018A-UL2018_NanoAODv15-v2/NANOAOD"
+  MuonEG_Run2018B: "/MuonEG/Run2018B-UL2018_NanoAODv15-v2/NANOAOD"
+  MuonEG_Run2018C: "/MuonEG/Run2018C-UL2018_NanoAODv15-v2/NANOAOD"
+  MuonEG_Run2018D: "/MuonEG/Run2018D-UL2018_NanoAODv15-v1/NANOAOD"

@@ -116,6 +116,15 @@ def main():
     parser.add_argument("--first-entry", type=int, default=0,
                         help="Index of the first event to process. Default is 0.")
 
+    # Golden JSON filtering for collision data.
+    # This is passed directly to NanoAODTools PostProcessor(jsonInput=...).
+    parser.add_argument(
+        "-J", "--json-input",
+        type=str,
+        default=None,
+        help="Golden JSON file for certified run/luminosity sections (data only)"
+    )
+
     # [3] ttbarCategorizer Options
     # ────────────────────────────────────────────────────────────────────
     # These flags control the optional debug behaviour of the
@@ -151,6 +160,15 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # Validate Golden JSON when requested.
+    # Data jobs pass -J/--json-input; MC jobs leave it unset.
+    if args.json_input:
+        if os.path.exists(args.json_input):
+            logger.info(f"Golden JSON loaded: {args.json_input}")
+        else:
+            logger.error(f"Golden JSON NOT found: {args.json_input}")
+            sys.exit(1)
 
     # ────────────────────────────────────────────────────────────────────
     # Pass ttcat options through to the module via environment variables.
@@ -268,6 +286,7 @@ def main():
             outputDir=OUTPUT_DIR,
             inputFiles=args.input_files,
             cut=CUT_STRING,
+            jsonInput=args.json_input,
             # ─────────────────────────────────────────────────────────
             # branchsel       = INPUT  tree filter   -> None (= read all)
             # outputbranchsel = OUTPUT tree filter   -> keep/drop file

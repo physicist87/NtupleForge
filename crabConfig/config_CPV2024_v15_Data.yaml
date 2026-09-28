@@ -1,0 +1,60 @@
+# Top CPV Run3 2024 Data - NanoAOD v15
+#
+# Golden JSON filtering is performed inside NanoAODTools PostProcessor
+# through jsonInput (-J), NOT through CRAB lumiMask.
+#
+# Data and MC use FileBased / 1 file per job.
+
+common:
+  year: "2024"
+  sample_type: "Data"
+  jobID: "CPV2024_v15_Data"
+  site: "T3_KR_KNU"
+  output_base: "CPV_ntuple/NanoAODv15/2024/Data"
+  analysis_module: ["modules/noop.py", "MODULES"]
+  branch_file: "branches/branch_CPV_Run3_Data.txt"
+  splitting: "FileBased"
+  units_per_job: 1
+  golden_json: "https://cms-service-dqmdc.web.cern.ch/CAF/certification/Collisions24/Cert_Collisions2024_378981_386951_Golden.json"
+
+datasets:
+  MuonEG_Run2024C: "/MuonEG/Run2024C-MINIv6NANOv15-v1/NANOAOD"
+  MuonEG_Run2024D: "/MuonEG/Run2024D-MINIv6NANOv15-v1/NANOAOD"
+  MuonEG_Run2024E: "/MuonEG/Run2024E-MINIv6NANOv15-v1/NANOAOD"
+  MuonEG_Run2024F: "/MuonEG/Run2024F-MINIv6NANOv15-v2/NANOAOD"
+  MuonEG_Run2024G: "/MuonEG/Run2024G-MINIv6NANOv15-v3/NANOAOD"
+  MuonEG_Run2024H: "/MuonEG/Run2024H-MINIv6NANOv15-v2/NANOAOD"
+  MuonEG_Run2024I: "/MuonEG/Run2024I-MINIv6NANOv15-v2/NANOAOD"
+  MuonEG_Run2024I_v2: "/MuonEG/Run2024I-MINIv6NANOv15_v2-v2/NANOAOD"
+  EGamma0_Run2024C: "/EGamma0/Run2024C-MINIv6NANOv15-v1/NANOAOD"
+  EGamma1_Run2024C: "/EGamma1/Run2024C-MINIv6NANOv15-v1/NANOAOD"
+  EGamma0_Run2024D: "/EGamma0/Run2024D-MINIv6NANOv15-v1/NANOAOD"
+  EGamma1_Run2024D: "/EGamma1/Run2024D-MINIv6NANOv15-v1/NANOAOD"
+  EGamma0_Run2024E: "/EGamma0/Run2024E-MINIv6NANOv15-v1/NANOAOD"
+  EGamma1_Run2024E: "/EGamma1/Run2024E-MINIv6NANOv15-v1/NANOAOD"
+  EGamma0_Run2024F: "/EGamma0/Run2024F-MINIv6NANOv15-v1/NANOAOD"
+  EGamma1_Run2024F: "/EGamma1/Run2024F-MINIv6NANOv15-v1/NANOAOD"
+  EGamma0_Run2024G: "/EGamma0/Run2024G-MINIv6NANOv15-v2/NANOAOD"
+  EGamma1_Run2024G: "/EGamma1/Run2024G-MINIv6NANOv15-v2/NANOAOD"
+  EGamma0_Run2024H: "/EGamma0/Run2024H-MINIv6NANOv15-v2/NANOAOD"
+  EGamma1_Run2024H: "/EGamma1/Run2024H-MINIv6NANOv15-v1/NANOAOD"
+  EGamma0_Run2024I: "/EGamma0/Run2024I-MINIv6NANOv15-v1/NANOAOD"
+  EGamma1_Run2024I: "/EGamma1/Run2024I-MINIv6NANOv15-v1/NANOAOD"
+  EGamma0_Run2024I_v2: "/EGamma0/Run2024I-MINIv6NANOv15_v2-v1/NANOAOD"
+  EGamma1_Run2024I_v2: "/EGamma1/Run2024I-MINIv6NANOv15_v2-v1/NANOAOD"
+  Muon0_Run2024C: "/Muon0/Run2024C-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024C: "/Muon1/Run2024C-MINIv6NANOv15-v1/NANOAOD"
+  Muon0_Run2024D: "/Muon0/Run2024D-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024D: "/Muon1/Run2024D-MINIv6NANOv15-v1/NANOAOD"
+  Muon0_Run2024E: "/Muon0/Run2024E-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024E: "/Muon1/Run2024E-MINIv6NANOv15-v1/NANOAOD"
+  Muon0_Run2024F: "/Muon0/Run2024F-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024F: "/Muon1/Run2024F-MINIv6NANOv15-v1/NANOAOD"
+  Muon0_Run2024G: "/Muon0/Run2024G-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024G: "/Muon1/Run2024G-MINIv6NANOv15-v2/NANOAOD"
+  Muon0_Run2024H: "/Muon0/Run2024H-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024H: "/Muon1/Run2024H-MINIv6NANOv15-v2/NANOAOD"
+  Muon0_Run2024I: "/Muon0/Run2024I-MINIv6NANOv15-v1/NANOAOD"
+  Muon1_Run2024I: "/Muon1/Run2024I-MINIv6NANOv15-v1/NANOAOD"
+  Muon0_Run2024I_v2: "/Muon0/Run2024I-MINIv6NANOv15_v2-v1/NANOAOD"
+  Muon1_Run2024I_v2: "/Muon1/Run2024I-MINIv6NANOv15_v2-v1/NANOAOD"
